@@ -1,0 +1,57 @@
+name: QA TestOps Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  run-automation-suite:
+    name: Ejecución de Pruebas automatizadas con Playwright - CI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Descargar Código del Repositorio
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Entorno Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: 3. Levantar Infraestructura de Kafka (Docker)
+        run: |
+          docker compose -f src/docker-compose.yml up -d
+          
+      - name: 4. Instalar Dependencias de la Aplicación
+        run: |
+          npm ci
+          npm install --no-save @testiny/cli@latest
+
+      - name: 5. Instalar Dependencias de Pruebas (Playwright)
+        run: |
+          npm run install:browsers:ci
+
+      - name: 6. Ejecutar pruebas Playwright
+        run: |
+          npm run test
+
+      - name: 7. Subir Reporte HTML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/  
+
+      #- name: 8.Upload results to Testiny
+      #  if: ${{ !cancelled() }}
+
+      #  env: 
+      #    TESTINY_API_KEY: ${{ secrets.TESTINY_API_KEY }}              
+        
+      #  run: |
+      #    npx playwright show-report || true
+      #    npx @testiny/cli automation --project "01" --source tests --playwright playwright-report/results.json
+          
+      #  continue-on-error: true

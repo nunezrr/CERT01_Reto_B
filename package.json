@@ -1,0 +1,17 @@
+{
+  "name": "reto01",
+  "version": "1.0.0",
+  "description": "Plantilla base para practicar automatización de front-end con despliegue local en Docker.",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "install:browsers:ci": "playwright install --with-deps"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@types/node": "^25.9.1"
+  }
+}
