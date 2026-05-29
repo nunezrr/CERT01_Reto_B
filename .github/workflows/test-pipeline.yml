@@ -20,9 +20,9 @@ jobs:
         with:
           node-version: 24
 
-      - name: 3. Levantar Infraestructura 
-        run: |
-          docker compose -f src/docker-compose.yml up -d
+      #- name: 3. Levantar Infraestructura 
+      #  run: |
+      #    docker compose -f src/docker-compose.yml up -d
           
       - name: 4. Instalar Dependencias de la Aplicación
         run: |
