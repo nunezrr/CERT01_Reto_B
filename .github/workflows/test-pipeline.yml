@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 24
 
-      - name: 3. Levantar Infraestructura de Kafka (Docker)
+      - name: 3. Levantar Infraestructura 
         run: |
           docker compose -f src/docker-compose.yml up -d
           
