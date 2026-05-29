@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { RegistroAsincronoActions } from './RegistroAsincrono.Actions';
+import { RegistroAsincronoActions } from './RegistroPage.Actions';
 
 test('RegistroAsincrono', async ({ page }) => {
   const registro = await new RegistroAsincronoActions(page).open();

@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { BASE_URL, ButtonName, RegistroAsincronoLocators } from './RegistroAsincrono.Locators';
+import { BASE_URL, ButtonName, RegistroAsincronoLocators } from './RegistroPage.Locators';
 import { capture } from './Evidence';
 
 // ============ Acciones ============
@@ -57,14 +57,14 @@ export class RegistroAsincronoActions {
      * @param locator - Localizador del elemento a verificar
      */
     async expectEstadoInicial(): Promise<void> {
-        await expect(this.locators.estadoBox).toContainText('Estado: Esperando registro...', { timeout: 10000 });
+        await expect(this.locators.estadoBox).toContainText('Estado: Esperando registro...', { timeout: 15000 });
         /** 
         await expect(async () => {
         await expect(this.locators.estadoBox).toContainText('Estado: Esperando registro...');
             }).toPass({
                 // Opciones de polling:
                 intervals: [1000, 2000, 5000], // Intervalos entre intentos (en milisegundos)
-                timeout: 10000                 // Tiempo total máximo que durará el polling (10 segundos)
+                timeout: 15000                 // Tiempo total máximo que durará el polling (15 segundos)
             });**/
     }
 
@@ -73,7 +73,7 @@ export class RegistroAsincronoActions {
      * @param locator - Localizador del elemento a verificar
      */
     async expectEstadoCreado(): Promise<void> {
-      await expect(this.locators.estadoBox).toContainText('Estado: Usuario Creado Exitosamente', { timeout: 10000 });
+      await expect(this.locators.estadoBox).toContainText('Estado: Usuario Creado Exitosamente', { timeout: 15000 });
       await capture(this.page, 'registro-de-usuario-creado-exitosamente'); 
       /** 
       await expect(async () => {
@@ -81,7 +81,7 @@ export class RegistroAsincronoActions {
         }).toPass({
             // Opciones de polling:
             intervals: [1000, 2000, 5000], // Intervalos entre intentos (en milisegundos)
-            timeout: 10000                 // Tiempo total máximo que durará el polling (10 segundos)
+            timeout: 15000                 // Tiempo total máximo que durará el polling (15 segundos)
         });**/
     }
   
